@@ -1,53 +1,24 @@
-# Unlabelled Speaker Recognition Project
+# Introduction
 
-## 1. Data Exploration and Analysis
-### Characteristics & Challenges
-- **Unlabelled nature**: No ground truth for validation
-- **Potential issues**: Background noise, varying recording quality, speaker overlap
-- **Diversity**: 200 speakers likely have varying vocal characteristics
+This project is about figuring out how to recognize individual speakers from a set of unlabelled audio recordings. There are over 200 unique speakers, but no labels. The challenge is to explore how we might group or identify them based on just the audio itself.
 
-### Initial Exploration Steps
-- [ ] Visualize waveform amplitudes across samples
-- [ ] Generate MFCC/specrogram visualizations for 10-20 samples
-- [ ] Compute duration statistics (min/max/avg recording length)
-- [ ] Attempt qualitative clustering with t-SNE/UMAP on raw features
+Given my background in software development and backend systems, I approached this by combining some light data exploration, a bit of signal processing, and unsupervised learning techniques. I haven't done production-level audio work before, but I do have experience working with raw data, so I approached this as a technical problem that can be broken down and tested step-by-step.
 
-## 2. Proposed Solution
-### Primary Approach: Self-Supervised Speaker Embedding + Clustering
-**Pipeline:**
-1. Preprocessing
-   - Voice activity detection (pyannote.voice or simple amplitude threshold)
-   - Noise reduction (optional spectral gating)
+---
 
-2. Feature Extraction
-   - Extract speaker embeddings using pre-trained model (ECAPA-TDNN, x-vectors)
-   - Alternative: MFCCs + Delta features as baseline
+## 1. Data Exploration & Analysis (10%)
+### Initial Thoughts
+Unlabelled audio data is tricky because:
+- There's no way to directly verify your clustering is "correct"
+- People can sound very similar or very different depending on how/when they talk
+- Recording conditions (microphone quality, noise, etc.) can introduce a lot of variability
 
-3. Clustering
-   - HDBSCAN (handles unknown cluster count)
-   - OPTICS (for density-based clustering)
-   - Spectral clustering (if clear manifold structure exists)
+### What I Would Do First
+- [ ] **Listen to samples:** Randomly pick 10–15 files to understand quality, length, noise, etc
+- [ ] **Visualize waveforms:** Use Python libraries like `librosa` or `scipy` to plot waveforms and spectrograms
+- [ ] **Check durations:** Are all recordings similar in length? Some speakers might dominate if not
+- [ ] **Basic patterns:** Even without labels, maybe certain speech rhythms, pitch ranges, or energy levels could hint at different speakers
 
-**Justification:**
-- Pre-trained models capture speaker characteristics without labels
-- Density-based clustering works better than K-means for unknown speaker count
-- Visualization of embeddings provides qualitative validation
+---
 
-### Alternative Approach: Contrastive Learning
-- Train Siamese network to learn discriminative features
-- Requires careful pair sampling strategy
-
-## 3. Implementation Strategy
-```python
-# Pseudocode
-def process_audio():
-   for recording in dataset:
-       # VAD & preprocessing
-       clean_audio = remove_noise(recording)
-       segments = detect_voice_activity(clean_audio)
-       
-       # Feature extraction
-       embeddings = ecapa_model.extract(segments)
-       
-       # Clustering
-       cluster_labels = hdbscan.fit_predict(embeddings)
+## 2. Proposed Solutions & Justification (10%)
