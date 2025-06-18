@@ -21,7 +21,7 @@ Unlabelled audio data is tricky because:
 
 ---
 
-## 2. Proposed Solutions & Justification (10%)
+## 2. Proposed Solutions & Justification (50%)
 ### Main Idea
 Instead of trying to process the raw audio manually, I would use a pretrained model that’s already been trained to distinguish between voices. Models like **Resemblyzer** or **SpeechBrain (ECAPA-TDNN)** can generate **embeddings**, which are fixed-length numeric vectors that represent the essence of a speaker’s voice.
 
@@ -32,3 +32,12 @@ Once I have those embeddings, I can treat the problem like any clustering proble
 2. **Visualize embeddings** with t-SNE or UMAP to see if natural groupings emerge
 3. **Run clustering** (DBSCAN, HDBSCAN, Agglomerative Clustering)
 4. **Evaluate clusters** by listening manually and using basic metrics like silhouette score
+
+### Why This Could Work
+- Pretrained embeddings are built specifically to capture speaker traits
+- Clustering doesn't need labels, which fits the problem perfectly
+- These models are easy to use with just a few lines of code (Resemblyzer has a nice API)
+
+---
+
+## 3. Implementation Strategy (20%)
