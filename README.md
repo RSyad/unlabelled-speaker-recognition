@@ -41,3 +41,26 @@ Once I have those embeddings, I can treat the problem like any clustering proble
 ---
 
 ## 3. Implementation Strategy (20%)
+### a. Preprocessing
+- **Resample to 16kHz** (most models expect this)
+- **Trim silence** using voice activity detection (like WebRTC VAD or `librosa.effects.split`)
+- **Normalize volume** if some recordings are much louder than others
+
+### b. Feature Extraction
+- Use **Resemblyzer** to generate 256-D embeddings
+- Optionally compare with MFCCs or Mel-spectrograms if needed
+
+### c. Clustering
+- Try **HDBSCAN** (no need to pre-define number of clusters)
+- Test **KMeans** with k=200 as a baseline
+- Tune parameters like min cluster size, distance threshold, etc.
+
+### d. Evaluation
+- **t-SNE plots** to visualize clusters
+- **Silhouette score** to check separation
+- **Listen to 2–3 samples per cluster** and manually judge if they sound similar
+- **Split one recording into two parts** and check if they fall in the same cluster
+
+---
+
+## 4. Challenges & Considerations (20%)
