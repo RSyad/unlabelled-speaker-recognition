@@ -76,3 +76,27 @@ Once I have those embeddings, I can treat the problem like any clustering proble
 - Try multiple clustering methods and compare results
 - Create a simple rule-based test set (e.g., duplicate recordings → should land in same cluster)
 - If possible, add some synthetic data (e.g., same voice, different content) for testing consistency
+
+---
+
+## Repository Structure
+```
+unlabelled-speaker-recognition/
+│
+├── README.md                  # This file
+│
+├── notebooks/                 # Jupyter notebooks for analysis & visualisation
+│   ├── exploration.ipynb      # Spectrograms, waveforms, basic stats
+│   └── clustering.ipynb       # Embeddings + unsupervised clustering
+│
+├── scripts/                   # Python scripts or pseudocode
+│   ├── extract_embeddings.py  # Uses Resemblyzer to get speaker vectors
+│   ├── clustering.py          # DBSCAN/HDBSCAN logic
+│   └── utils.py               # Preprocessing helpers (silence trimming)
+│
+├── assets/                    # For images/plots
+│   ├── waveforms/             # Waveform or spectrogram visuals
+│   └── clusters/              # t-SNE plots, silhouette scores, etc.
+│
+└── data/                      # For storing data
+    └── dummy_audio/           # dummy .wav files for testing
