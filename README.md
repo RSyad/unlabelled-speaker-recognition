@@ -64,3 +64,15 @@ Once I have those embeddings, I can treat the problem like any clustering proble
 ---
 
 ## 4. Challenges & Considerations (20%)
+### What Makes This Hard
+- No labels = no objective way to evaluate correctness
+- Some speakers may sound extremely similar
+- Noise and background conditions could dominate the voice features
+- With 200 speakers, the clusters might be too close together or overlapping
+- Risk of overfitting clustering to noise
+
+### How I'd Try to Handle It
+- Use models trained for speaker diarization, not just voice recognition
+- Try multiple clustering methods and compare results
+- Create a simple rule-based test set (e.g., duplicate recordings → should land in same cluster)
+- If possible, add some synthetic data (e.g., same voice, different content) for testing consistency
