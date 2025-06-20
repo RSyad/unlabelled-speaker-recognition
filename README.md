@@ -99,4 +99,4 @@ unlabelled-speaker-recognition/
 │   └── clusters/              # t-SNE plots, silhouette scores, etc.
 │
 └── data/                      # For storing data
-    └── dummy_audio/           # dummy .wav files for testing
+    └── dummy_audio/           # Dummy .wav files for testing
